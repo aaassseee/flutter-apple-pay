@@ -18,6 +18,7 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "flutter_apple_pay", binaryMessenger: registrar.messenger())
+        registrar.register(ApplaPayButtonFactory(), withId: "apple_pay_button")
         registrar.addMethodCallDelegate(SwiftFlutterApplePayPlugin(), channel: channel)
     }
     
