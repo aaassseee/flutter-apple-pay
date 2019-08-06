@@ -27,6 +27,8 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
             flutterResult = result;
             let parameters = NSMutableDictionary()
             var payments: [PKPaymentNetwork] = []
+            var shippingFields: Set<PKContactField> = []
+            
             var items = [PKPaymentSummaryItem]()
             var totalPrice:Double = 0.0
             let arguments = call.arguments as! NSDictionary
@@ -34,10 +36,11 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
             guard let paymentNeworks = arguments["paymentNetworks"] as? [String] else {return}
             guard let countryCode = arguments["countryCode"] as? String else {return}
             guard let currencyCode = arguments["currencyCode"] as? String else {return}
-
+            
             guard let stripePublishedKey = arguments["stripePublishedKey"] as? String else {return}
             guard let paymentItems = arguments["paymentItems"] as? [NSDictionary] else {return}
             guard let merchantIdentifier = arguments["merchantIdentifier"] as? String else {return}
+            let requiredShippingContactFields = arguments["requiredShippingContactFields"] as? [String]
             
             for dictionary in paymentItems {
                 guard let label = dictionary["label"] as? String else {return}
@@ -64,8 +67,17 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
                 payments.append(paymentType.paymentNetwork)
             }
             
+            requiredShippingContactFields?.forEach{
+                guard let shippingFieldType = ShippingFields(rawValue: $0) else {
+                    assertionFailure("No shipping field type found")
+                    return
+                }
+                
+                shippingFields.insert(shippingFieldType.shippingField)
+            }
+            
             parameters["paymentNetworks"] = payments
-            parameters["requiredShippingContactFields"] = [PKContactField.name, PKContactField.postalAddress] as Set
+            parameters["requiredShippingContactFields"] = shippingFields
             parameters["merchantCapabilities"] = PKMerchantCapability.capability3DS // optional
             
             parameters["merchantIdentifier"] = merchantIdentifier
@@ -88,13 +100,13 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
     
     func authorizationCompletion(_ payment: String) {
         // success
-//        var result: [String: Any] = [:]
-//
-//        result["token"] = payment.token.transactionIdentifier
-//        result["billingContact"] = payment.billingContact?.emailAddress
-//        result["shippingContact"] = payment.shippingContact?.emailAddress
-//        result["shippingMethod"] = payment.shippingMethod?.detail
-//
+        //        var result: [String: Any] = [:]
+        //
+        //        result["token"] = payment.token.transactionIdentifier
+        //        result["billingContact"] = payment.billingContact?.emailAddress
+        //        result["shippingContact"] = payment.shippingContact?.emailAddress
+        //        result["shippingMethod"] = payment.shippingMethod?.detail
+        //
         flutterResult(payment)
     }
     
@@ -116,14 +128,33 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
         var paymentNetwork: PKPaymentNetwork {
             
             switch self {
-                case .mastercard: return PKPaymentNetwork.masterCard
-                case .visa: return PKPaymentNetwork.visa
-                case .amex: return PKPaymentNetwork.amex
-                case .quicPay: return PKPaymentNetwork.quicPay
-                case .chinaUnionPay: return PKPaymentNetwork.chinaUnionPay
-                case .discover: return PKPaymentNetwork.discover
-                case .interac: return PKPaymentNetwork.interac
-                case .privateLabel: return PKPaymentNetwork.privateLabel
+            case .mastercard: return PKPaymentNetwork.masterCard
+            case .visa: return PKPaymentNetwork.visa
+            case .amex: return PKPaymentNetwork.amex
+            case .quicPay: return PKPaymentNetwork.quicPay
+            case .chinaUnionPay: return PKPaymentNetwork.chinaUnionPay
+            case .discover: return PKPaymentNetwork.discover
+            case .interac: return PKPaymentNetwork.interac
+            case .privateLabel: return PKPaymentNetwork.privateLabel
+            }
+        }
+    }
+    
+    enum ShippingFields: String {
+        case postalAddress
+        case emailAddress
+        case phoneNumber
+        case name
+        case phoneticName
+        
+        var shippingField: PKContactField {
+            
+            switch self {
+            case .postalAddress: return PKContactField.postalAddress
+            case .emailAddress: return PKContactField.emailAddress
+            case .phoneNumber: return PKContactField.phoneNumber
+            case .name: return PKContactField.name
+            case .phoneticName: return PKContactField.phoneticName
             }
         }
     }
@@ -149,7 +180,10 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
             pkrequest.countryCode = countryCode
             pkrequest.currencyCode = currencyCode
             pkrequest.supportedNetworks = paymentNetworks
-            pkrequest.requiredShippingContactFields = requiredShippingContactFields
+            if (!requiredShippingContactFields.isEmpty) {
+                pkrequest.requiredShippingContactFields = requiredShippingContactFields
+            }
+            
             // This is based on using Stripe
             pkrequest.merchantCapabilities = merchantCapabilities
             
@@ -167,8 +201,8 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
         } else {
             let error: NSDictionary = ["message": "User not added some cards", "code": "404"]
             authControllerCompletion(error)
-         }
-
+        }
+        
         return
     }
     
@@ -184,15 +218,15 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
             self.authorizationCompletion(stripeToken.stripeID)
             self.completionHandler = completion
         }
-
+        
     }
-
+    
     public func closeApplePaySheetWithSuccess() {
         if (self.completionHandler != nil) {
             self.completionHandler(PKPaymentAuthorizationResult(status: .success, errors: nil))
         }
     }
-
+    
     public func closeApplePaySheetWithError() {
         if (self.completionHandler != nil) {
             self.completionHandler(PKPaymentAuthorizationResult(status: .failure, errors: nil))
