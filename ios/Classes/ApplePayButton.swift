@@ -28,8 +28,14 @@ public class ApplaPayButton : NSObject, FlutterPlatformView {
     }
     
     public func view() -> UIView {
-        
-        let view : PKPaymentButton = PKPaymentButton.init(paymentButtonType: .plain, paymentButtonStyle: .black)
+        let view : UIView
+        if #available(iOS 9.0, *) {
+             view = PKPaymentButton.init(paymentButtonType: .plain, paymentButtonStyle: .black)
+        } else if #available(iOS 8.3, *){
+            view = PKPaymentButton()
+        } else {
+            view = UIView()
+        }
         view.frame = self.frame
         return view
     }
