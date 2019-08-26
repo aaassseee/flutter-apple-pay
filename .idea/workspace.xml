@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a744c89-1119-45c0-bad6-700b8b925d71" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/ios/Classes/SwiftFlutterApplePayPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/ios/Classes/SwiftFlutterApplePayPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/ios/flutter_apple_pay.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/ios/flutter_apple_pay.podspec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_apple_pay.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_apple_pay.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/ApplePayButton.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/ApplePayButton.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftFlutterApplePayPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftFlutterApplePayPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/flutter_apple_pay.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/flutter_apple_pay.podspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flutter_apple_pay.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_apple_pay.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565058869288</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added ios 8.3 min support">
+      <created>1566536344620</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1566536344620</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,7 +100,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added optional shipping fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="added optional shipping fields" />
+    <MESSAGE value="added ios 8.3 min support" />
+    <option name="LAST_COMMIT_MESSAGE" value="added ios 8.3 min support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
