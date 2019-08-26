@@ -79,7 +79,9 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
                     return
                 }
                 
-                payments.append(paymentType.paymentNetwork!)
+                if(paymentType.paymentNetwork != nil) {
+                    payments.append(paymentType.paymentNetwork!)
+                }
             }
             
             requiredShippingContactFields?.forEach{
@@ -88,7 +90,9 @@ public class SwiftFlutterApplePayPlugin: NSObject, FlutterPlugin, PKPaymentAutho
                     return
                 }
                 
-                shippingFields.insert(shippingFieldType.shippingField!)
+                if(shippingFieldType.shippingField != nil) {
+                    shippingFields.insert(shippingFieldType.shippingField!)
+                }
             }
             
             parameters["paymentNetworks"] = payments
