@@ -4,7 +4,6 @@
     <list default="true" id="9a744c89-1119-45c0-bad6-700b8b925d71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/flutter_apple_pay/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flutter_apple_pay.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_apple_pay.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566536344620</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added missing merchant name on dart side">
+      <created>1566784502820</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1566784502820</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,7 +107,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added optional shipping fields" />
     <MESSAGE value="added ios 8.3 min support" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ios 8.3 min support" />
+    <MESSAGE value="added missing merchant name on dart side" />
+    <option name="LAST_COMMIT_MESSAGE" value="added missing merchant name on dart side" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
